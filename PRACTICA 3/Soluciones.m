@@ -2,10 +2,9 @@
 %% Introducción a la adquisición de imágenes digitales en MatLab
 %% Francisco Jesús Beltrán Moreno
 %% Ejercicio 1 & 2
-clear all; clc;
+clear; clc;
 
 % Configuración WebCam
-datos = imaqhwinfo('macvideo')
 video = videoinput('macvideo', 1, 'YCbCr422_480X270');
 video.ReturnedColorSpace = 'rgb';
 
@@ -31,14 +30,14 @@ for i=1:length(umbrales)
    
    Ib = (I > Umbral);
    
-   [Ietiq N] = bwlabel(Ib);
+   [Ietiq,N] = bwlabel(Ib);
    
    stats = regionprops(Ietiq, 'Area', 'Centroid');
    
    areas = cat(1,stats.Area);
    centroides = cat(1,stats.Centroid);
    
-   [areas_ord indices] = sort(areas, 'descend');
+   [areas_ord,indices] = sort(areas, 'descend');
    
    subplot(2,2,i+1), funcion_visualiza(Ic, Ib, [255 255 0]); title(['Pixeles con I mayor que ' num2str(Umbral)]);
    hold on, plot(centroides(:,1), centroides(:,2), '*r'), plot(centroides(indices(1),1), centroides(indices(1),2),'*b');
