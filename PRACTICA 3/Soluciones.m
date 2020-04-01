@@ -134,7 +134,42 @@ end
 stop(video)
 
 %% Ejercicio 6
-clear all; clc;
+clear; clc;
+
+% Configuración de la WebCam
+video = videoinput('macvideo', 1, 'YCbCr422_480X270');
+video.ReturnedColorSpace = 'grayscale';
+
+% Formato grabación
+video.TriggerRepeat = Inf;
+video.FrameGrabInterval = 2;
+
+% Variables
+Umbral = 100;
+
+start(video)
+
+% Capturamos el primer frame
+frame_ant = getdata(video,1);
+
+while( video.FramesAcquired < 500 )
+    frame = getdata(video,1);
+    
+    Imag_dif = imabsdiff(frame_ant, frame);
+    
+    Mov_sig = (Imag_dif > Umbral);
+    
+    subplot(1,3,1), imshow(frame_ant);
+    subplot(1,3,2), imshow(Imag_dif);
+    subplot(1,3,3), imshow(Mov_sig);
+    
+    frame_ant = frame;
+end
+
+stop(video)
+
+%% Ejercicio 7
+clear; clc;
 
 % Configuración de la WebCam
 video = videoinput('macvideo', 1, 'YCbCr422_480X270');
@@ -153,9 +188,7 @@ frame_ant = getdata(video,1);
 
 while( video.FramesAcquired < 500 )
     frame = getdata(video,1);
-    
     Imag_dif = imabsdiff(frame_ant, frame);
-    
     Mov_sig = (Imag_dif > Umbral);
     
     [Ietiq N] = bwlabel(Mov_sig);
