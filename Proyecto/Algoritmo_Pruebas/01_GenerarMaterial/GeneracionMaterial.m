@@ -1,5 +1,4 @@
 %% Comprobación del número de frames con los que trabaja la cámara
-
 %salida = imaqhwinfo('macvideo')
 %salida.DeviceInfo.SupportedFormats
 entrada = videoinput('macvideo', 1, 'YCbCr422_1280x720');
@@ -90,4 +89,5 @@ for i=1:size(imagenes,4)
     pause
 end
 
-save('ImagenesEntrenamientoCalibracion', 'imagenes')
+save('./ImagenesEntrenamiento_Calibracion', 'imagenes')
+save('../02_ExtracionDatos/ImagenesEntrenamiento_Calibracion', 'imagenes')
