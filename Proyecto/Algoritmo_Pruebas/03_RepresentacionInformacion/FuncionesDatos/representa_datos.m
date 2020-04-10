@@ -17,7 +17,7 @@ function representa_datos(X,Y)
         plot3(ValoresR, ValoresG, ValoresB, string(colores{i}))
         hold on;
     end
-
+    
     hold off;
     xlabel('Componente Roja'), ylabel('Componente Verde'), zlabel('Componente Azul');
     valorMin = 0; valorMax = 255;
