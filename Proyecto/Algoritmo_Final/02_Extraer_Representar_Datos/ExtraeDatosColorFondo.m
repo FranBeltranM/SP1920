@@ -4,7 +4,7 @@ addpath('../01_GeneracionMaterial')
 
 %% Lectura de imágenes y extracción de datos
 % Leemos imágenes de calibración
-load ImagenesEntrenamiento_Calibracion.mat
+load GeneracionImagenesEntrenamiento_Calibracion.mat
 [N, M, NumComp, NumImag] = size(imagenes);
 
 % Vemos las imágenes
@@ -52,10 +52,33 @@ X = [DatosColor(:,2:4) ;            DatosFondo(:,2:4)];
 Y = [ones(size(DatosColor,1),1) ;  zeros(size(DatosFondo,1),1)];
 
 % La toma de datos debería acabar guardando la información
-save('./VariablesGeneradas/conjunto_de_datos','X','Y');
+save('./VariablesGeneradas/conjunto_de_datos_original','X','Y');
 
 %% Representación de la información
 clear
-load ('./VariablesGeneradas/conjunto_de_datos')
+load ('./VariablesGeneradas/conjunto_de_datos_original')
 close all
 representa_datos_color_seguimiento_fondo(X,Y)
+
+%% Detección y eliminación de outliers
+% Generación conjunto final de datos
+
+pos_outliers = funcion_detecta_outliers_clase_interes(X,Y);
+
+X(pos_outliers,:) = [];
+Y(pos_outliers) = [];
+
+representa_datos_color_seguimiento_fondo(X,Y)
+
+save('./VariablesGeneradas/conjunto_de_datos','X','Y')
+
+
+
+
+
+
+
+
+
+
+
