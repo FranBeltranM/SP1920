@@ -203,6 +203,8 @@ for i=2:numFrames
         writeVideo(videoOutput, I);
     end
     
+    I_ant = I;
+    
 end
 
 close(videoOutput);
