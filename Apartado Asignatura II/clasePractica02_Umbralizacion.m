@@ -87,6 +87,3 @@ subplot(2,1,1), imshow(uint8(I))
 subplot(2,1,2), funcion_visualiza(uint8(I), Ib, [255 0 0])
 figure, imhist(uint8(I))
 title(['Umbral: ' num2str(g_MinEntreMax)])
-
-
-

@@ -1,5 +1,11 @@
-function [g_MinEntreMax, gmax1, gmax2] = funcion_MinEntreMax(I)
+function [g_MinEntreMax, gmax1, gmax2] = funcion_MinEntreMax(I, vectorPesos)
     h = imhist(uint8(I));
+    
+    if not(isempty(vectorPesos))
+        
+        h = funcion_suaviza_vector_medias_moviles(h, vectorPesos);
+        
+    end
     
     % Calcular máximo global
     [numPixMax, gmax1] = max(h);
@@ -31,5 +37,24 @@ function [g_MinEntreMax, gmax1, gmax2] = funcion_MinEntreMax(I)
         gmax2 = temp-1;
     end
     
-    g_MinEntreMax = find(h==min(h))-1;
+    g_MinEntreMax = find(h==min(h),1)-1;
+end
+
+function hs = funcion_suaviza_vector_medias_moviles(h, pesos)
+
+    amp = floor(length(pesos)/2);
+    
+    pesos = (1/sum(pesos))*pesos; % para que se haga un promedio
+    
+    pesos = pesos(:)'; % vector fila siempre
+    hc = h(:); % vector columnas siempre
+    hamp = [hc(amp+1:-1:2) ; hc ; hc(end-1:-1:end-amp)];
+    
+    hs = zeros(size(h));
+    
+    for i=1:length(h)
+        ind_hamp = i + amp;
+        hs(i) = pesos*hamp(ind_hamp-amp:ind_hamp+amp);  
+    end
+    
 end
