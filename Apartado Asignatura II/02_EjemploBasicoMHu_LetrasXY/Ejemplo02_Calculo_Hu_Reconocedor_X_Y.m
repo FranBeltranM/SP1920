@@ -1,0 +1,69 @@
+% DISEÑAR SIGUIENTE FUNCIÓN: funcion_reconocedor_X_Y_porHu1
+% ENTRADA: nombre o ruta de la imagen
+% SALIDA: ABRIR TANTAS IMÁGENES COMO OBJETOS, DONDE SE RESALTEN LOS PÍXELES
+% DEL OBJETO EN UN COLOR Y SE HAGA CONSTAR SU RECONOCIMIENTO EN EL TÍTULO
+
+% UTILIZAR COMO CLASIFICADOR UNA REGLA DE DECISIÓN BASADA EN EL PRIEMR Hu
+
+%% PARA VER EL PRIMER MOMENTO DE HU Y ESTABLECER LA REGLA DE DECISIÓN
+
+clear, clc, close all
+
+addpath('DatosGenerados')
+addpath('Funciones')
+
+load conjunto_datos.mat
+load nombresProblema.mat
+
+% Varibales del problema
+[numMuestras, numDescriptores] = size(X);
+codifClases = unique(Y);
+numClases = length(codifClases);
+
+funcion_representa_datos(X, Y, [1 2], nombresProblema)
+
+% CONCLUSIÓN: Si Hu1 es > 1.1: letra X, caso contrario, letra Y
+
+
+%% función Ejemplo_Calculo_Hu_Reconocedor_X_Y(Imagen)
+
+% PROGRAMACIÓN DE FUNCIÓN RECONOCE_OBJETOS: PASOS GENERALES
+
+% 0.- CARGAR/GENERAR INFORMACIÓN ESPECÍFICA RELATIVA A NUESTRO PROBLEMA DE
+% CLASIFICADOR
+% En este ejemplo específico: cargar el daot discriminante de Hu1
+
+% 1.- BINARIZAR (MÉTODO DE SELECCIÓN AUTOMÁTICA UMBRAL - OTSU)
+
+% 2.- ELIMINAR POSIBLES COMPONENTES CONECTADAS RUIDOSAS:
+% COMPONENTE RUIDOSA:
+% COMPONENTE DE MENOS DEL 0.1% DEL NÚMERO TOTAL DE PÍXELES DE LA IMAGEN O
+% NÚMERO DE PÍXELES MENOR AL AREA DEL OBJETO MAYOR /5
+% SE DEBE CUMPLIR CUALQUIERA DE LAS DOS CONDICIONES
+
+% 3.- ETIQUETAR
+
+% 4.- LLAMAR A UNA FUNCIÓN QUE CALCULE TODOS LOS DESCRIPTORES CONSIDERADOS
+% ES DECIR, FUNCIÓN QUE GENERA MATRIZ X DE DATOS
+% (NO TENEMOS Y!!!! --> ES LO QUE TENEMOS QUE GENERAR CON NUESTRO
+% CLASIFICADOR) 
+% XTest = funcion_calcula_Hu_objetos_imagen(Ietiq, N);
+
+% 5.- RECORRER CADA OBJETO Y APLICAR LA REGLA DE DECISIÓN PARA GENERAR LA
+% SALIDA SOLICITADA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
