@@ -26,7 +26,7 @@ for i=1:numClases
     if sum(IbinFilt(:) > 0)
         
         [Ietiq, N] = bwlabel(IbinFilt);
-        XImagen = funcion_calcula_descriptores_extent_hu_imagen(Ietiq, N);
+        XImagen = funcion_calcula_descriptores_extentInvRot_hu_imagen(Ietiq, N);
         YImagen = i*ones(N,1);
         
     else
@@ -43,7 +43,7 @@ end
 
 save('./DatosGenerados/conjunto_datos', 'X', 'Y')
 
-nombreDescriptores = {'Extension', 'Hu1', 'Hu2', 'Hu3', 'Hu4', 'Hu5', 'Hu6', 'Hu7'};
+nombreDescriptores = {'Extension', 'ExtensionInvRot', 'Hu1', 'Hu2', 'Hu3', 'Hu4', 'Hu5', 'Hu6', 'Hu7'};
 nombreClases{1} = 'Cuadrados';
 nombreClases{2} = 'Triangulos';
 simbolosClases{1} = '*r';
