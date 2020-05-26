@@ -48,9 +48,7 @@ function [mCov, coef_corr1, coef_corr2, numDatosClase1, numDatosClase2, numDatos
     numDatosClase1 = sum(Y==valoresClases(1));
     numDatosClase2 = sum(Y==valoresClases(2));
 
-    % SE CUMPLEN TODAS LAS CONDICIONES DE APLICACIÓN PAR LA APLICACIÓN DE MDE
-
-    %% DISEÑO DEL CLASIFICADOR MDE
+    %% DISEÑO DEL CLASIFICADOR MDE - MDM
 
     if Tipo == "MDE"
         [d1, d2, d12, coeficientes_d12] = funcion_calcula_funciones_decision_MDE_clasificacion_binaria(X,Y);
@@ -73,6 +71,7 @@ function [mCov, coef_corr1, coef_corr2, numDatosClase1, numDatosClase2, numDatos
     x1Recta = x1min:0.01:x1max;
     x2Recta = -(A*x1Recta+C)/(B+eps);
 
+    %% REPRESENTACIÓN DE LAS RECTAS O PLANOS
     if numAtributos == 3
         D = coeficientes_d12(4);
         Xmin = min(X(:));
@@ -131,7 +130,6 @@ function [mCov, coef_corr1, coef_corr2, numDatosClase1, numDatosClase2, numDatos
 
     end
     %% EVALUAMOS LA PRECISIÓN
-
     Y_modelo = Y_clasificador1;
     error = Y_modelo-Y;
     num_aciertos = sum(error==0);

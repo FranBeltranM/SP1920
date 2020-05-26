@@ -14,6 +14,6 @@ function Extent = funcion_calcula_Extent(Matriz_Binaria)
         
     end
     
-    Extent = max(Ex);
+    Extent = max(Ex(:));
     
 end
